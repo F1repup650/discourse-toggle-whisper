@@ -28,10 +28,10 @@ const actionInit = (api) => {
       if (model.post_number < 2) return;
 
       let isAction = model.post_type === 3;
-      let icon = isAction ? "far-eye" : "far-eye-slash";
+      let icon = isAction ? "star" : "far-star";
       let title = isAction
         ? "toggle_button_title.regular"
-        : "toggle_button_title.whisper";
+        : "toggle_button_title.action";
       return {
         action: "toggleAction",
         icon: icon,
