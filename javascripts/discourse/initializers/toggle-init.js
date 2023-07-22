@@ -3,18 +3,18 @@ import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
 export default {
-  name: "toggle-whispers",
+  name: "toggle-action",
   initialize() {
-    withPluginApi("0.11.0", whisperInit);
+    withPluginApi("0.11.0", actionInit);
   },
 };
 
-const whisperInit = (api) => {
+const actionInit = (api) => {
   const currentUser = api.getCurrentUser();
-  if (currentUser && currentUser.staff && currentUser.whisperer) {
-    api.attachWidgetAction("post-menu", "toggleWhisper", function () {
+  if (currentUser && currentUser.staff) {
+    api.attachWidgetAction("post-menu", "toggleAction", function () {
       const model = this.attrs;
-      let newType = model.post_type === 1 ? 4 : 1;
+      let newType = model.post_type === 1 ? 3 : 1;
 
       ajax(`/posts/${model.id}/post_type`, {
         type: "PUT",
@@ -24,16 +24,16 @@ const whisperInit = (api) => {
       }).catch(popupAjaxError);
     });
 
-    api.addPostMenuButton("toggleWhisper", (model) => {
+    api.addPostMenuButton("toggleAction", (model) => {
       if (model.post_number < 2) return;
 
-      let isWhisper = model.post_type === 4;
-      let icon = isWhisper ? "far-eye" : "far-eye-slash";
-      let title = isWhisper
+      let isAction = model.post_type === 3;
+      let icon = isAction ? "far-eye" : "far-eye-slash";
+      let title = isAction
         ? "toggle_button_title.regular"
-        : "toggle_button_title.whisper";
+        : "toggle_button_title.action";
       return {
-        action: "toggleWhisper",
+        action: "toggleAction",
         icon: icon,
         title: themePrefix(title),
         position: "second-last-hidden",
