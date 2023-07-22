@@ -31,7 +31,7 @@ const actionInit = (api) => {
       let icon = isAction ? "far-eye" : "far-eye-slash";
       let title = isAction
         ? "toggle_button_title.regular"
-        : "toggle_button_title.action";
+        : "toggle_button_title.whisper";
       return {
         action: "toggleAction",
         icon: icon,
