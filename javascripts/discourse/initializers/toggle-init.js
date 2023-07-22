@@ -5,11 +5,11 @@ import { popupAjaxError } from "discourse/lib/ajax-error";
 export default {
   name: "toggle-whisper",
   initialize() {
-    withPluginApi("0.11.0", actionInit);
+    withPluginApi("0.11.0", whisperInit);
   },
 };
 
-const actionInit = (api) => {
+const whisperInit = (api) => {
   const currentUser = api.getCurrentUser();
   if (currentUser && currentUser.staff) {
     api.attachWidgetAction("post-menu", "toggleWhisper", function () {
@@ -24,16 +24,16 @@ const actionInit = (api) => {
       }).catch(popupAjaxError);
     });
 
-    api.addPostMenuButton("toggleAction", (model) => {
+    api.addPostMenuButton("toggleWhisper", (model) => {
       // if (model.post_number < 2) return;
 
       let isAction = model.post_type === 4;
       let icon = isAction ? "far-eye" : "far-eye-slash";
       let title = isAction
         ? "toggle_button_title.regular"
-        : "toggle_button_title.whispee";
+        : "toggle_button_title.whisper";
       return {
-        action: "toggleAction",
+        action: "toggleWhisper",
         icon: icon,
         title: themePrefix(title),
         position: "second-last-hidden",
