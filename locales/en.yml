@@ -1,4 +1,5 @@
 en:
   toggle_button_title:
     action: "Make Action"
+    whisoer: "This shouldn't be shown"
     regular: "Make Regular Post"
