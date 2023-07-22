@@ -25,7 +25,7 @@ const actionInit = (api) => {
     });
 
     api.addPostMenuButton("toggleAction", (model) => {
-      if (model.post_number < 2) return;
+      // if (model.post_number < 2) return;
 
       let isAction = model.post_type === 3;
       let icon = isAction ? "star" : "far-star";
